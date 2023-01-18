@@ -1,0 +1,30 @@
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
+
+name: CI-CD-UITest
+env:
+EB_PACKAGE_S3_BUCKET_NAME : "adv-it-flask-application-packages"
+EB_APPLICATION_NAME : "MyFlask"
+EB_ENVIROMENT_NAME : "MyFlask-env"
+DEPLOY_PACKAGES_NAME : "flask_app_${{ github.sha}}.zip"
+
+
+
+
+on:
+ push:
+   branches: 
+   - master
+   
+jobs:
+run name: my_ci_part;
+runs-on: ubuntu-latest
+  
+
+    steps : 
+    - name: Git clone our repo 
+    uses: actions/checkout@v1
+    -name: Create ZIP deployment package
+    run : zip -r ${{evn.DEPLOY_PACKAGE_NAME}} ./ -x *.git*
+
+     
